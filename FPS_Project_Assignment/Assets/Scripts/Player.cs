@@ -6,6 +6,8 @@ public class Player : MonoBehaviour {
 
     private Rigidbody rb;
     public float ms;
+    public float ds_speed;
+    public bool isMoving;
 
 	// Use this for initialization
 	void Awake () {
@@ -19,9 +21,23 @@ public class Player : MonoBehaviour {
 
     void Movement()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
-            rb.AddForce(Vector3.up * ms, ForceMode.Acceleration);
+            isMoving = true;
+            rb.AddForce(Vector3.up * ms * Time.deltaTime);
+            isMoving = false;
         }
+        if (Input.GetKey(KeyCode.S))
+        {
+            isMoving = true;
+
+            rb.AddForce(Vector3.up * -ms * Time.deltaTime);
+            isMoving = false;
+        }
+        if (!isMoving)
+        {
+            rb.velocity = Vector3.zero;
+        }
+
     }
 }

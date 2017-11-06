@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
+    public GameObject Options_GUI_Holder;
+
+
     public void MainMenu()
     {
         //Index 0 is Start Screen
@@ -20,8 +23,11 @@ public class UIManager : MonoBehaviour {
 
     public void Options()
     {
-        //Index 2 is options menu
-        SceneManager.LoadScene("Options");
+        if (Options_GUI_Holder.activeInHierarchy == false)
+        {
+            Options_GUI_Holder.SetActive(true);
+        }
+        else Options_GUI_Holder.SetActive(false);
     }
     public void LeaderBoards()
     {
