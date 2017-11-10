@@ -27,6 +27,8 @@ public class WaveGenerator : MonoBehaviour
     private Wave m_CurrentWave;
     public Wave CurrentWave{get { return m_CurrentWave;} }
     private float m_DelayFactor = 1.0f;
+    public Vector3 SpawnPos;
+
 
     IEnumerator SpawnLoop()
     {
@@ -48,8 +50,9 @@ public class WaveGenerator : MonoBehaviour
                     {
                         for (int i = 0;  i < A.spawnCount; i++)
                         {
-                            //Vector3 spawnPoint = new Vector3(gameObject.transform.position.x, Random.Range(-5, 5), gameObject.transform.position.z);
-                            GameObject.Instantiate(A.prefab);
+                            SpawnPos = new Vector3(transform.position.x, Random.Range(-5, 5),transform.position.z);
+                              
+                            GameObject.Instantiate(A.prefab,SpawnPos, Quaternion.identity);
                         }
                     }
                 }

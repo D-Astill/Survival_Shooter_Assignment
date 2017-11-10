@@ -1,17 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 [RequireComponent(typeof(Rigidbody))]
-public class Player : MonoBehaviour {
+public class Player : NetworkBehaviour {
 
     private Rigidbody rb;
     public float ms;
     public float ds_speed;
-    public bool isMoving;
+    public Camera cam;
+    //public Vector3 TransformClamp;
 
 	// Use this for initialization
 	void Awake () {
-        rb = GetComponent<Rigidbody>();
+        gameObject.SetActive(true);
+        if (!isLocalPlayer)
+        {
+            cam = FindObjectOfType<Camera>();
+            rb = GetComponent<Rigidbody>();
+
+        }
+        
 	}
 	
 	// Update is called once per frame
@@ -21,23 +30,15 @@ public class Player : MonoBehaviour {
 
     void Movement()
     {
+        //TransformClamp.x = Mathf.Clamp(transform.position.x, -4.5f, 4.5f);
+
         if (Input.GetKey(KeyCode.W))
         {
-            isMoving = true;
-            rb.AddForce(Vector3.up * ms * Time.deltaTime);
-            isMoving = false;
+            rb.AddForce(Vector3.up * ms ,ForceMode.Impulse);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            isMoving = true;
-
-            rb.AddForce(Vector3.up * -ms * Time.deltaTime);
-            isMoving = false;
+            rb.AddForce(Vector3.up * -ms, ForceMode.Impulse);
         }
-        if (!isMoving)
-        {
-            rb.velocity = Vector3.zero;
-        }
-
     }
 }
