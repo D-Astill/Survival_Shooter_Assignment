@@ -25,7 +25,7 @@ public class WaveGenerator : MonoBehaviour
     public float difficultyFactor = 0.9f;
     public List<Wave> waves;
     private Wave m_CurrentWave;
-    public Wave CurrentWave{get { return m_CurrentWave;} }
+    public Wave CurrentWave { get { return m_CurrentWave; } }
     private float m_DelayFactor = 1.0f;
     public Vector3 SpawnPos;
 
@@ -33,26 +33,26 @@ public class WaveGenerator : MonoBehaviour
     IEnumerator SpawnLoop()
     {
         m_DelayFactor = 1.0f;
-        while(true)
+        while (true)
         {
-            foreach(Wave W in waves)
+            foreach (Wave W in waves)
             {
                 m_CurrentWave = W;
-                foreach(WaveAction A in W.actions)
+                foreach (WaveAction A in W.actions)
                 {
                     if (A.delay > 0)
                         yield return new WaitForSeconds(A.delay * m_DelayFactor);
-                    if(A.message != "")
+                    if (A.message != "")
                     {
                         print("Spawn Enemy");
                     }
-                    if(A.prefab != null && A.spawnCount > 0)
+                    if (A.prefab != null && A.spawnCount > 0)
                     {
-                        for (int i = 0;  i < A.spawnCount; i++)
+                        for (int i = 0; i < A.spawnCount; i++)
                         {
-                            SpawnPos = new Vector3(transform.position.x, Random.Range(-5, 5),transform.position.z);
-                              
-                            GameObject.Instantiate(A.prefab,SpawnPos, Quaternion.identity);
+                            SpawnPos = new Vector3(transform.position.x, Random.Range(-5, 5), transform.position.z);
+
+                            GameObject.Instantiate(A.prefab, SpawnPos, Quaternion.identity);
                         }
                     }
                 }

@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour {
+public class UIManager : MonoBehaviour
+{
 
     public GameObject Options_GUI_Holder;
 
@@ -39,8 +40,6 @@ public class UIManager : MonoBehaviour {
         //Index 4 is leaderboards
         SceneManager.LoadScene("Single_Player");
     }
-    
-    
 
     public void Quit()
     {
